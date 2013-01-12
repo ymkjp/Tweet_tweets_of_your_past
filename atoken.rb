@@ -1,4 +1,5 @@
 #!/usr/bin/ruby
+# encoding: utf-8
 
 require "rubygems"
 require "twitter"
@@ -31,7 +32,7 @@ target = "./old_tweets/ymkjp130107.csv"
 def choose_tweet(target)
     # XXX error handling
     all_tweets = []
-    CSV.open(target, 'r') do |row|
+    CSV.foreach(target) do |row|
         all_tweets << row
     end
 
@@ -46,12 +47,11 @@ def detoxify_tweet(str)
     return str
 end
 
-
 chosen_tweet = choose_tweet(target)
 
 # choose again if the chosen tweet is the reply to someone
 is_reply = /^@[0-9A-Za-z_]/
-#is_reply_or_RT = /^(@[0-9A-Za-z_]|RT)/
+is_reply_or_RT = /^(@[0-9A-Za-z_]|RT)/
 while is_reply =~ chosen_tweet[2]
     chosen_tweet = choose_tweet(target)
 end
