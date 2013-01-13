@@ -44,7 +44,7 @@ def detoxify_tweet(str)
     str.gsub!(/@/, '')
     str.gsub!(/#/, '')
 
-    return str
+    return str.slice!(139...-1)
 end
 
 chosen_tweet = choose_tweet(target)
