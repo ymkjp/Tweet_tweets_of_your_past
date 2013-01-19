@@ -24,7 +24,6 @@ Twitter.configure do |config|
     config.oauth_token_secret = ACCESS_TOKEN_SECRET
 end
 
-###
 require "csv"
 #target = "./old_tweets/ymkjp000000.csv"
 target = "./old_tweets/ymkjp130107.csv"
@@ -44,7 +43,7 @@ def detoxify_tweet(str)
     str.gsub!(/@/, '')
     str.gsub!(/#/, '')
 
-    return str.slice(0..140)
+    return str.slice(0..139)
 end
 
 chosen_tweet = choose_tweet(target)
