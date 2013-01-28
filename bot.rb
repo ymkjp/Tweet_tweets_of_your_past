@@ -25,12 +25,13 @@ Twitter.configure do |config|
     config.oauth_token_secret = ACCESS_TOKEN_SECRET
 end
 
+###
 require "csv"
 #target = "./old_tweets/ymkjp000000.csv"
 target = "./old_tweets/ymkjp130107.csv"
 
 def choose_tweet(target)
-    # XXX error handling
+    # XXX It occuers error if send a same tweet in recent 5 tweets
     all_tweets = []
     begin
         CSV.foreach(target) do |row|
