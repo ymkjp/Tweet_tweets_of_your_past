@@ -5,6 +5,7 @@ require "rubygems"
 require "twitter"
 require "logger"
 require "optparse"
+require "cgi"
 
 require './application_keys'
 
@@ -31,8 +32,12 @@ target = "./old_tweets/ymkjp130107.csv"
 def choose_tweet(target)
     # XXX error handling
     all_tweets = []
-    CSV.foreach(target) do |row|
-        all_tweets << row
+    begin
+        CSV.foreach(target) do |row|
+            all_tweets << row
+        end
+    rescue
+        all_tweets << ["", "", "@ymkjp error[0]"]
     end
 
     return all_tweets[rand(all_tweets.length)]
@@ -43,15 +48,21 @@ def detoxify_tweet(str)
     str.gsub!(/@/, '')
     str.gsub!(/#/, '')
 
+    str = CGI.unescapeHTML(str)
+
+    if str.size <= 139
+        return str
+    end
+
     return str.slice(0..139)
 end
 
 chosen_tweet = choose_tweet(target)
 
 # choose again if the chosen tweet is the reply to someone
-is_reply = /^@[0-9A-Za-z_]/
-is_reply_or_RT = /^(@[0-9A-Za-z_]|RT)/
-while is_reply =~ chosen_tweet[2]
+#is_reply = /^@[0-9A-Za-z_]/
+is_reply_or_rt = /^(@[0-9A-Za-z_]|RT)/
+while is_reply_or_rt =~ chosen_tweet[2]
     chosen_tweet = choose_tweet(target)
 end
 
