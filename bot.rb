@@ -8,6 +8,7 @@ require "logger"
 require "cgi"
 require "csv"
 require 'date'
+require 'uri'
 
 require './application_keys'
 require './tweet_selector'

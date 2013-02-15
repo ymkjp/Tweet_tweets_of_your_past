@@ -3,7 +3,7 @@ class TweetFormer
     class << self
     def reform(tweet_row)
         tweet_txt = remove_hashtag(remove_reply(unescape_html(tweet_row[2])))
-        diminish_characters(tweet_txt) if tweet_txt.size >= 129
+        tweet_txt = diminish_characters(tweet_txt) if tweet_txt.size >= 128
         tweet_row[2] = append_date(tweet_txt, tweet_row[1])
 
         return tweet_row
@@ -24,7 +24,7 @@ class TweetFormer
         end
 
         def diminish_characters(str)
-            str.slice!(0..127)
+            str = str.gsub(URI.regexp, '').slice(0..127)
             str += "…"
         end
 
