@@ -15,9 +15,9 @@ require './tweet_selector'
 require './tweet_former'
 require './tweet_manager'
 
-#csv = "./old_tweets/ymkjp000000.csv"
-csv = "./old_tweets/ymkjp130107.csv"
-LOG = Logger.new("./logs/bot.log")
+#csv = "../old_tweets/ymkjp000000.csv"
+csv = "../old_tweets/ymkjp130107.csv"
+LOG = Logger.new("../logs/bot.log")
 
 MultiJson.engine = :ok_json
 Twitter.configure do |config|
