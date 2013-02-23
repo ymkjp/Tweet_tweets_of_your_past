@@ -6,3 +6,6 @@ logs/*
 
 # CSV files
 old_tweets/*
+
+# CSV file for debug
+!/old_tweets/ymkjp000000.csv
