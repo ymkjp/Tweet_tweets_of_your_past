@@ -1,5 +1,8 @@
 # Twitter's Application keys
 application_keys.rb
 
-# The log file
+# Log files
 logs/*
+
+# CSV files
+old_tweets/*
